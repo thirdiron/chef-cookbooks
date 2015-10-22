@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: livingroom
+# Cookbook Name:: nodejs
 # Recipe:: default
 #
 # Copyright (C) 2015 YOUR_NAME
