@@ -32,7 +32,7 @@ end
 livingroom_conf_exchange "metadata-updates-exchange" do
   type "fanout"
   durable true
-  action :install
+  action :declare
 end
 
 # CHEF STUFF HERE
