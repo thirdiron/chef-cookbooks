@@ -29,11 +29,11 @@ rabbitmq_user "admin" do
   action :set_tags
 end
 
-# Install the rabbitmqadmin CLI tool
-
-# CHEF STUFF HERE
-
-# Set up the exchange
+livingroom_exchange "metadata-updates-exchange" do
+  type "fanout"
+  durable true
+  action :install
+end
 
 # CHEF STUFF HERE
 
