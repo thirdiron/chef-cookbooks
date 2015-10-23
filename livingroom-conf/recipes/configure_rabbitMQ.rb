@@ -29,7 +29,7 @@ rabbitmq_user "admin" do
   action :set_tags
 end
 
-livingroom_exchange "metadata-updates-exchange" do
+livingroomconf_exchange "metadata-updates-exchange" do
   type "fanout"
   durable true
   action :install
