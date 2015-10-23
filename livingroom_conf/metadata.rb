@@ -1,4 +1,4 @@
-name             'livingroom-conf'
+name             'livingroom_conf'
 maintainer       'Mike Lang'
 maintainer_email 'mike@thirdiron.com'
 license          'All rights reserved'
