@@ -7,6 +7,12 @@ use_inline_resources
 
 action :declare do
   if !exists?
+    # Beats me why I would have to install this myself
+    # But I'm getting an error from the rabbitmq gem
+    chef_gem 'faraday' do
+      version '0.8.11'
+    end
+
     chef_gem 'rabbitmq_http_api_client' do
       version '1.3.0'
     end
