@@ -8,4 +8,4 @@
 #
 # include the dependent nodejs recipe, but with our module's attributes 
 # so we fetch the appropriate version of nodeJS
-include_recipe 'nodejs'
+include_recipe 'nodejs::nodejs_from_package'
