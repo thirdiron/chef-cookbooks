@@ -1,6 +1,10 @@
 # 3i-nodejs-cookbook
 
-TODO: Enter the cookbook description here.
+3i-nodejs - a wrapper nodejs cookbook to run recipes from the nodejs
+cookbook on the supermarket configured how third iron wants it
+configured
+
+(I had to adjust the repo attribute to get it to install nodejs 4.x)
 
 ## Supported Platforms
 
