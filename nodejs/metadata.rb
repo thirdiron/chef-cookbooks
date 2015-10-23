@@ -1,7 +1,0 @@
-name             'nodejs'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
-license          'All rights reserved'
-description      'Installs/Configures nodejs'
-long_description 'Installs/Configures nodejs'
-version          '0.1.0'
