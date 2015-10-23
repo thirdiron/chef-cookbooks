@@ -1,4 +1,3 @@
-resource_name :exchange
 
 actions :declare, :delete
 default_action :declare
