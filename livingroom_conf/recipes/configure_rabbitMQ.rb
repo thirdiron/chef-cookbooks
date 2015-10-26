@@ -1,7 +1,7 @@
 
 include_recipe 'rabbitmq::mgmt_console'
 
-rabbitmq_vhost "/article-herald" do
+rabbitmq_vhost "article-herald" do
   action :add
 end
 
@@ -17,7 +17,7 @@ rabbitmq_user "admin" do
 end
 
 rabbitmq_user "admin" do
-  vhost "/article-herald"
+  vhost "article-herald"
   permissions ".* .* .*"
   action :set_permissions
 end
@@ -28,20 +28,20 @@ rabbitmq_user "admin" do
 end
 
 livingroom_conf_exchange "metadata-updates-exchange" do
-  vhost "/article-herald"
+  vhost "article-herald"
   type "fanout"
   durable true
   action :declare
 end
 
 livingroom_conf_queue "user-db-updates" do
-  vhost "/article-herald"
+  vhost "article-herald"
   durable true
   action :declare
 end
 
 livingroom_conf_binding "updates-queue-binding" do
-  vhost "/article-herald"
+  vhost "article-herald"
   queue "user-db-updates"
   exchange "metadata-updates-exchange"
   action :declare
