@@ -28,6 +28,7 @@ rabbitmq_user "admin" do
 end
 
 livingroom_conf_exchange "metadata-updates-exchange" do
+  vhost "/article-herald"
   type "fanout"
   durable true
   action :declare
