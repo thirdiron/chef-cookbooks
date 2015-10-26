@@ -34,8 +34,15 @@ livingroom_conf_exchange "metadata-updates-exchange" do
   action :declare
 end
 
-# CHEF STUFF HERE
+livingroom_conf_queue "user-db-updates" do
+  vhost "/article-herald"
+  durable true
+  action :declare
+end
 
-# Set up the queue & bind it to the exchange
-
-# CHEF STUFF HERE
+livingroom_conf_binding "updates-queue-binding" do
+  vhost "/article-herald"
+  queue "user-db-updates"
+  exchange "metadata-updates-exchange"
+  action :declare
+end
