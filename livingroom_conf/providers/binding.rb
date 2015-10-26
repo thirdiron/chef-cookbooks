@@ -31,7 +31,7 @@ action :declare do
     client.bind_queue(new_resource.vhost, 
                       new_resource.queue, 
                       new_resource.exchange,
-                      new_resource.attrs)
+                      new_resource.routing_key)
   end
 
 end

@@ -17,6 +17,5 @@ attribute :vhost, :kind_of => String, :default => 'default_vhost'
 attribute :name, :kind_of => String, :name_attribute => true
 attribute :queue, :kind_of => String, :default => 'default_queue'
 attribute :exchange, :kind_of => String, :default => 'default exchange'
+attribute :routing_key, :kind_of => String, :default => ''
 
-#catch-all attrs attribute for anything else I didn't explicitly create an attribute for
-attribute :attrs, :kind_of => Hash, :default => {}
