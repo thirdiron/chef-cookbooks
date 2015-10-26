@@ -1,7 +1,5 @@
 
-rabbitmq_plugin "rabbitmq_management" do
-  action :enable
-end
+include_recipe 'rabbitmq::mgmt_console'
 
 rabbitmq_vhost "/article-herald" do
   action :add
