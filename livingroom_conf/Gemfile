@@ -14,5 +14,6 @@ gem 'berkshelf'
 #   gem "vagrant-omnibus", github: "schisamo/vagrant-omnibus"
 # end
 
+gem "rabbitmq_http_api_client", "1.3.0"
 gem "test-kitchen"
 gem "kitchen-vagrant"
