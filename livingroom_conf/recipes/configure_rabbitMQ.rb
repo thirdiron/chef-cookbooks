@@ -16,13 +16,13 @@ rabbitmq_user node['rabbitmq-settings']['admin-user'] do
   action :add
 end
 
-rabbitmq_user "admin" do
+rabbitmq_user node['rabbitmq-settings']['admin-user'] do
   vhost "article-herald"
   permissions ".* .* .*"
   action :set_permissions
 end
 
-rabbitmq_user "admin" do
+rabbitmq_user node['rabbitmq-settings']['admin-user'] do
   tag "administrator"
   action :set_tags
 end
