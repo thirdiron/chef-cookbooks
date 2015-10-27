@@ -9,10 +9,10 @@ rabbitmq_user "guest" do
   action :delete
 end
 
-rabbitmq_user "admin" do
+rabbitmq_user node['rabbitmq-settings']['admin-user'] do
 # Figure out how to shuttle a proper secret into here
 # and replace with a proper password
-  password "admin"
+  password node['rabbitmq-settings']['admin-password']
   action :add
 end
 
