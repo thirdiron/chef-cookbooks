@@ -24,7 +24,7 @@ end
 # to tell PAM to increase system limits on file descriptors
 # used by the couchdb process
 template '/etc/security/limits.d/100-couchdb.conf' do
-  source 'etc_security_limits_d_100_couchdb_conf'
+  source 'etc_security_limits_d_100_couchdb_conf.erb'
   variables({
     :max_connections => node['couch_db']['config']['httpd']['max_connections']
   })
