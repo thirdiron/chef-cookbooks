@@ -15,8 +15,8 @@ include_recipe 'couchdb::default'
 template '/etc/couchdb/default' do
   source 'etc_default_couchdb.erb'
   variables({
-    max_connections => node['couch_db']['config']['httpd']['max_connections'],
-    num_erlang_threads => node['3i-couch_db']['num_erlang_threads']
+    :max_connections => node['couch_db']['config']['httpd']['max_connections'],
+    :num_erlang_threads => node['3i-couch_db']['num_erlang_threads']
   })
 end
 
@@ -26,7 +26,7 @@ end
 template '/etc/security/limits.d/100-couchdb.conf' do
   source 'etc_security_limits_d_100_couchdb_conf'
   variables({
-    max_connections => node['couch_db']['config']['httpd']['max_connections']
+    :max_connections => node['couch_db']['config']['httpd']['max_connections']
   })
 end
 
