@@ -1,27 +1,20 @@
 # 3i-couchdb-cookbook
 
-TODO: Enter the cookbook description here.
+A wrapper cookbook to configure the couchdb cookbook
+from the chef supermarket for the central couchdb server
+holding user bookshelves and read/unread status
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+See https://github.com/wohali/couchdb-cookbook
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['3i-couchdb']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+This cookbook overrides some default attributes to
+configure our couchdb server appropriately
+
+For a full list of possible attributes see
+https://github.com/wohali/couchdb-cookbook
 
 ## Usage
 
@@ -39,4 +32,4 @@ Include `3i-couchdb` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Mike Lang (mike@thirdiron.com)

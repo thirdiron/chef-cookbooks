@@ -8,24 +8,14 @@ configured
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+See https://github.com/redguide/nodejs
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['3i-nodejs']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+This cookbook adjusts default['nodejs']['repo'] to be the nodesource
+repo that serves nodejs 4.x
+
+For other available attributes see https://github.com/redguide/nodejs
 
 ## Usage
 
@@ -43,4 +33,4 @@ Include `3i-nodejs` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Mike Lang (mike@thirdiron.com)
