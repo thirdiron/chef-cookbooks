@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'couchdb_default'
+include_recipe 'couchdb::default'
 
 # deposit a file to set ERL_MAX_PORTS env variable
 # to instruct the erlang runtime to allow more
