@@ -1,0 +1,5 @@
+# According to https://wiki.apache.org/couchdb/Performance
+# configures PAM to increase file descriptor limits
+#<domain>    <type>    <item>    <value>
+couchdb      hard      nofile    <%=max_connections%>
+couchdb      soft      nofile    <%=max_connections%>
