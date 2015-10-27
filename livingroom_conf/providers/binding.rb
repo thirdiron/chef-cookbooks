@@ -23,8 +23,8 @@ action :declare do
     require 'rabbitmq/http/client'
     client = RabbitMQ::HTTP::Client.new(
       "http://127.0.0.1:15672",
-      username: 'admin',
-      password: 'admin',
+      username: node['rabbitmq-settings']['admin-user'],
+      password: node['rabbitmq-settings']['admin-password'],
       ssl: {}
     )
 
