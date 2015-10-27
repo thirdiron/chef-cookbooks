@@ -16,7 +16,7 @@ template '/etc/couchdb/default' do
   source 'etc_default_couchdb.erb'
   variables({
     :max_connections => node['couch_db']['config']['httpd']['max_connections'],
-    :num_erlang_threads => node['3i-couch_db']['num_erlang_threads']
+    :num_erlang_threads => node['3i_couch_db']['num_erlang_threads']
   })
 end
 
