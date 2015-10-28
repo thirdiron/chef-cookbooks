@@ -9,6 +9,9 @@
 
 include_recipe 'couchdb::default'
 
+Chef::Log.info("num_erlang_threads attribute = #{node['3i_couch_db']['num_erlang_threads']}")
+Chef::Log.info('Why is nothing getting into the config file?')
+
 # deposit a file to set ERL_MAX_PORTS env variable
 # to instruct the erlang runtime to allow more
 # connections
