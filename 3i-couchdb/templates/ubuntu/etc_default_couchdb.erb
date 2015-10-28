@@ -4,4 +4,4 @@ export ERL_MAX_PORTS=<%= @max_connections %>
 # The following adjustment tells erlang to use multiple
 # threads and is helpful for keeping couchdb responsive
 # during periods of heavy disk utilization
-export ERL_FLAGS="+A <% @num_erlang_threads %>
+export ERL_FLAGS="+A <% @num_erlang_threads %>"
