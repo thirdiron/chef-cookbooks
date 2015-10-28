@@ -12,7 +12,7 @@ include_recipe 'couchdb::default'
 # deposit a file to set ERL_MAX_PORTS env variable
 # to instruct the erlang runtime to allow more
 # connections
-template '/etc/couchdb/default' do
+template '/etc/default/couchdb' do
   source 'etc_default_couchdb.erb'
   variables({
     :max_connections => node['couch_db']['config']['httpd']['max_connections'],
