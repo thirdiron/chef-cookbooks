@@ -10,8 +10,6 @@ rabbitmq_user "guest" do
 end
 
 rabbitmq_user node['rabbitmq-settings']['admin-user'] do
-# Figure out how to shuttle a proper secret into here
-# and replace with a proper password
   password node['rabbitmq-settings']['admin-password']
   action :add
 end
@@ -26,6 +24,35 @@ rabbitmq_user node['rabbitmq-settings']['admin-user'] do
   tag "administrator"
   action :set_tags
 end
+
+# user for the herald to use - no configure rights
+# read/write anywhere in the vhost
+rabbitmq_user 'herald' do
+  password node['rabbitmq-settings']['herald-password']
+  action :add
+end
+
+rabbitmq_user 'herald' do
+  vhost "article-herald"
+  permissions "^$ .* .*"
+  action :set_permissions
+end
+
+# user for the CMS to use - no configure rights
+# read/write anywhere in the vhost
+
+rabbitmq_user 'browzinecms' do
+  password node['rabbitmq-settings']['browzinecms-password']
+  action :add
+end
+
+rabbitmq_user 'browzinecms' do
+  vhost "article-herald"
+  permissions "^$ .* .*"
+  action :set_permissions
+end
+
+
 
 livingroom_conf_exchange "metadata-updates-exchange" do
   vhost "article-herald"
