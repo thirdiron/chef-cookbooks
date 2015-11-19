@@ -1,0 +1,7 @@
+name             'herald_conf'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures herald_conf'
+long_description 'Installs/Configures herald_conf'
+version          '0.1.0'
