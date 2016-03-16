@@ -12,7 +12,7 @@ node[:deploy].each do |application, deploy|
   # use the opsworks cookbook to set up
   # deployment directory just like the
   # default cookbook
-  deploy::opsworks_deploy_dir do
+  opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
     path deploy[:deploy_to]
@@ -23,12 +23,12 @@ node[:deploy].each do |application, deploy|
   # npm install, perform backups, set up
   # log rotation etc. just like the 
   # default cookbook
-  deploy::opsworks_deploy do
+  opsworks_deploy do
     deploy_data deploy
     app application
   end
 
-  opsworks_nodejs do
+  ti_opsworks_nodejs do
     deploy_data deploy
     app application
   end
