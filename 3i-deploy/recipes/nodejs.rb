@@ -1,4 +1,6 @@
-include_recipe 'deploy::deploy'
+# beats me what recipe this references.  Maybe it will automatically
+# deference correctly on opsworks like the opsworks recipes do?
+include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
   if deploy[:application_type] != 'nodejs'
