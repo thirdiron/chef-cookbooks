@@ -1,4 +1,4 @@
-define :opsworks_nodejs do
+define :ti_opsworks_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
 
