@@ -3,10 +3,10 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  if deploy[:application_type] != 'nodejs'
-    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
-    next
-  end
+#  if deploy[:application_type] != 'nodejs'
+#    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
+#    next
+#  end
 
   
   # use the opsworks cookbook to set up
