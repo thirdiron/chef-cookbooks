@@ -27,7 +27,7 @@ define :ti_opsworks_nodejs do
   # something more node specific, like pm2
   template "#{node.default[:monit][:conf_dir]}/node_web_app-#{application}.monitrc" do
     source '3i_node_web_app.monitrc.erb'
-    cookbook '3i_deploy'
+    cookbook '3i-deploy'
     owner 'root'
     group 'root'
     mode '0644'
