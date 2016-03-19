@@ -67,6 +67,12 @@ livingroom_conf_queue "user-db-updates" do
   action :declare
 end
 
+# Need to mention rsyslog so template updates
+# can notify with the :restart command
+service 'rsyslog' do
+  :nothing
+end
+
 livingroom_conf_binding "updates-queue-binding" do
   vhost "article-herald"
   queue "user-db-updates"
