@@ -73,3 +73,17 @@ livingroom_conf_binding "updates-queue-binding" do
   exchange "metadata-updates-exchange"
   action :declare
 end
+
+# Configure logs to go to logentries
+template "/etc/rsyslog.d/70-rabbitmq.conf" do
+  source '70-rabbitmq.conf.erb'
+  cookbook 'livingroom_conf'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    :hostname => node["opsworks"]["instance"]["hostname"],
+    :logentries_token => "ef2fb4d0-32f6-4444-bc55-73adbb22e899"
+  )
+  notifies :restart, "service[rsyslog]", :immediately
+end
