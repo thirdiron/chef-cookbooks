@@ -6,7 +6,7 @@ input(type="imfile"
       Severity="error"
       Facility="local7")
 
-      $template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag%%msg%\n"
+      $template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag% %msg%\n"
 
 :syslogtag, contains, "rabbitmq"
 *.* @@data.logentries.com:80;Logentries
