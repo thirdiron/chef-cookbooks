@@ -3,6 +3,6 @@
   "cwd": "<%= @cwd %>",
   "script": "<%= @script %>",
   "env": {
-    <% @environment.to_a.map { |pair| pair.map { |x| '"' + x + '"' }.join(': ') }.join(",\n") %>
+    <%= @environment.to_a.map { |pair| pair.map { |x| '"' + x + '"' }.join(': ') }.join(",\n") %>
   }
 }
