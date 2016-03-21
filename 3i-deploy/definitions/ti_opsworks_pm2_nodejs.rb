@@ -30,8 +30,8 @@ define :ti_opsworks_pm2_nodejs do
     group deploy[:group]
     variables(
       :application_name => application,
-      :cwd => "#{deploy[:deploy_to]}/current/housecleaning",
-      :script => "cron.js",
+      :cwd => "#{deploy[:deploy_to]}/current",
+      :script => "housecleaning/cron.js",
       :environment => deploy[:environment_variables]
     )
   end
