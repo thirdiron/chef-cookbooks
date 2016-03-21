@@ -2,6 +2,11 @@ define :ti_opsworks_pm2_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
 
+  # Use the OpsWorks nodeJS configuration library to
+  # invoke npm install
+  OpsWorks::NodejsConfiguration.npm_install(application, node[:deploy][application], release_path, node[:opsworks_nodejs][:npm_install_options])
+
+
   node[:dependencies][:npms].each do |npm, version|
     execute "/usr/local/bin/npm install #{npm}" do
       cwd "#{deploy[:deploy_to]}/current"
