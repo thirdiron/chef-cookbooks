@@ -1,5 +1,5 @@
 # beats me what recipe this references.  Maybe it will automatically
-# deference correctly on opsworks like the opsworks recipes do?
+# dereferences correctly on opsworks like the opsworks recipes do?
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
