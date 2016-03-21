@@ -27,7 +27,7 @@ node[:deploy].each do |application, deploy|
   end
 
   execute 'start_or_restart_cronjs' do
-    command "pm2 startOrRestart #{deploy[:deploy_to]}/pm2-app.json"
+    command "pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
   end
 
 end
