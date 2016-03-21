@@ -17,7 +17,7 @@ node[:deploy].each do |application, deploy|
   end
 
   opsworks_deploy do
-    deploy_data deploy
+    deploy_data deploy.merge({ :application_type => 'nodejs' })
     app application
   end
 
