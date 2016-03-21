@@ -18,8 +18,8 @@ node[:deploy].each do |application, deploy|
     path deploy[:deploy_to]
   end
 
-  opsworks_deploy do
-    deploy_data deploy.merge({ :application_type => 'nodejs' })
+  ti_opsworks_deploy do
+    deploy_data deploy
     app application
   end
 
