@@ -1,0 +1,18 @@
+module(load="imfile" PollingInterval="10")
+
+input(type="imfile"
+      File="/home/ubuntu/.pm2/logs/<%= @application_name %>-out-0.log"
+      Tag="<%= @application_name %>"
+      Severity="info"
+      Facility="local7")
+
+input(type="imfile"
+      File="/home/ubuntu/.pm2/logs/<%= @application_name %>-error-0.log"
+      Tag="<%= @application_name %>"
+      Severity="error"
+      Facility="local7")
+
+$template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag% %msg%\n"
+
+:syslogtag, contains, "<%= @application_name %>"
+*.* @@data.logentries.com:80;Logentries

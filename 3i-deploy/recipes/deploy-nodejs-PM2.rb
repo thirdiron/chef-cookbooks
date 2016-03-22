@@ -28,8 +28,20 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
+  template "/etc/rsyslog.d/70-#{application}.conf" do
+    source '70-pm2-app-rsyslog.conf.erb'
+    cookbook '3i-deploy'
+    owner 'root'
+    group 'root'
+    variables(
+      :application_name => application,
+      :logentries_token => deploy[:environment_variables]['LOGENTRIES_TOKEN']
+    )
+  end
+
   execute 'start_or_restart_cronjs' do
     command "pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
+    user 'ubuntu'
   end
 
 end
