@@ -2,7 +2,7 @@
   "name": "<%= @application_name %>",
   "cwd": "<%= @cwd %>",
   "script": "<%= @script %>",
-  "log_date_format" : "[YYYY-MM-DD HH:mm Z]",
+  "log_date_format" : "YYYY-MM-DD HH:mm Z",
   "env": {
     <%= @environment.to_a.map { |pair| pair.map { |x| '"' + x + '"' }.join(': ') }.join(",\n") %>
   }
