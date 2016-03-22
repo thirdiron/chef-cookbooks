@@ -28,6 +28,10 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
+  service 'rsyslog' do
+    :nothing
+  end
+
   template "/etc/rsyslog.d/70-#{application}.conf" do
     source '70-pm2-app-rsyslog.conf.erb'
     cookbook '3i-deploy'
@@ -37,6 +41,7 @@ node[:deploy].each do |application, deploy|
       :application_name => application,
       :logentries_token => deploy[:environment_variables]['LOGENTRIES_TOKEN']
     )
+    notifies :restart, "service[rsyslog]", :immediately
   end
 
   execute 'start_or_restart_cronjs' do
