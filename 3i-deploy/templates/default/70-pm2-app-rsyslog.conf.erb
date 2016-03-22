@@ -1,13 +1,15 @@
 module(load="imfile" PollingInterval="10")
 
+<%-# pm2 converts application name from snake case to kebab case for log file names -%>
+
 input(type="imfile"
-      File="/home/ubuntu/.pm2/logs/<%= @application_name %>-out-0.log"
+      File="/home/ubuntu/.pm2/logs/<%= @application_name.gsub(/_/, '-') %>-out-0.log"
       Tag="<%= @application_name %>"
       Severity="info"
       Facility="local7")
 
 input(type="imfile"
-      File="/home/ubuntu/.pm2/logs/<%= @application_name %>-error-0.log"
+      File="/home/ubuntu/.pm2/logs/<%= @application_name.gsub(/_/, '-') %>-error-0.log"
       Tag="<%= @application_name %>"
       Severity="error"
       Facility="local7")
