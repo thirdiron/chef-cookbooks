@@ -40,7 +40,7 @@ node[:deploy].each do |application, deploy|
   end
 
   execute 'start_or_restart_cronjs' do
-    command "env HOME=`eval echo \"~root\"` pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
+    command "env HOME=`eval echo \"~ubuntu\"` pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
     user 'ubuntu'
   end
 
