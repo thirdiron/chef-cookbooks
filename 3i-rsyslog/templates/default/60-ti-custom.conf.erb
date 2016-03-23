@@ -1,5 +1,0 @@
-# for now just send the local7 facility to LOGENTRIES
-# adjust this for more precise filtering
-$template Logentries,"8945eb35-0a2f-4878-99bc-d554cb8e2291 %HOSTNAME% %syslogtag%%msg%\n"
-
-local7.* @@data.logentries.com:80;Logentries
