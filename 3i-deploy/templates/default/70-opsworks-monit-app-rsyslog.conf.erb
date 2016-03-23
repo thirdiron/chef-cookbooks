@@ -20,4 +20,4 @@ $template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag% %msg%\n"
 # Also send any monit logs related to the app
 :syslogtag, contains, "monit"
 :msg, contains, "<%= @application_name %>"
-
+*.* @@data.logentries.com:80;Logentries
