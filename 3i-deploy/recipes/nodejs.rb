@@ -8,6 +8,7 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  Chef::Log.info("#{node['opsworks']['instance']['layers']}");
   
   # use the opsworks cookbook to set up
   # deployment directory just like the
