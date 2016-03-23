@@ -3,10 +3,10 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-#  if deploy[:application_type] != 'nodejs'
-#    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
-#    next
-#  end
+  if deploy[:application_type] != 'nodejs'
+    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
+    next
+  end
 
   
   # use the opsworks cookbook to set up
@@ -28,7 +28,24 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
-  ti_opsworks_nodejs do
+  service 'rsyslog' do
+    :nothing
+  end
+
+  template "/etc/rsyslog.d/70-#{application}.conf" do
+    source '70-opsworks-monit-app-rsyslog.conf.erb'
+    cookbook '3i-deploy'
+    owner 'root'
+    group 'root'
+    variables(
+      :application_name => application,
+      :deploy => deploy,
+      :logentries_token => deploy[:environment_variables]['LOGENTRIES_TOKEN']
+    )
+    notifies :restart, "service[rsyslog]", :immediately
+  end
+
+  opsworks_nodejs do
     deploy_data deploy
     app application
   end
@@ -39,6 +56,8 @@ node[:deploy].each do |application, deploy|
     path ::File.join(deploy[:deploy_to], "shared")
     environment_variables deploy[:environment_variables]
   end
+
+
 
   # This seems to only log things instead of actually restart anything
   ruby_block "restart node.js application #{application}" do
