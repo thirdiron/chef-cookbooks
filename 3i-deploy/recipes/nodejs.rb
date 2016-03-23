@@ -9,7 +9,7 @@ node[:deploy].each do |application, deploy|
   end
 
   if !(node['opsworks']['instance']['layers'].include? deploy[:environment_variables]['OPSWORKS_TARGET_LAYER'])
-    CHEF::Log.debug("Skipping deploy::nodejs for application #{application} as this instance is not in its target layer")
+    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as this instance is not in its target layer")
     next
   end
 
