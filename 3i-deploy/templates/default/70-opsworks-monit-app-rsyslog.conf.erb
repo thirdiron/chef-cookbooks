@@ -1,13 +1,13 @@
 module(load="imfile" PollingInterval="10")
 
 input(type="imfile"
-      File="<% @deploy[:deploy_to] %>/shared/log/node.stdout.log"
+      File="<%= @deploy[:deploy_to] %>/shared/log/node.stdout.log"
       Tag="<%= @application_name %>"
       Severity="info"
       Facility="local7")
 
 input(type="imfile"
-      File="<% @deploy[:deploy_to] %>/shared/log/node.stderr.log"
+      File="<%= @deploy[:deploy_to] %>/shared/log/node.stderr.log"
       Tag="<%= @application_name %>"
       Severity="info"
       Facility="local7")
