@@ -57,6 +57,11 @@ node[:deploy].each do |application, deploy|
     environment_variables deploy[:environment_variables]
   end
 
+  #ensure syslog user has access to the group that owns the log files
+  execute 'add_user_to_group' do
+    command 'usermod -a -G www-data syslog'
+    user 'root'
+  end
 
 
   # This seems to only log things instead of actually restart anything
