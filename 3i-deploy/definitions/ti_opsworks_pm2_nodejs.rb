@@ -32,7 +32,7 @@ define :ti_opsworks_pm2_nodejs do
     variables(
       :application_name => application,
       :cwd => "#{deploy[:deploy_to]}/current",
-      :script => "housecleaning/cron.js",
+      :script => deploy[:environment_variables]['NODEJS_PM2_ENTRY_POINT'],
       :environment => deploy[:environment_variables]
     )
   end
