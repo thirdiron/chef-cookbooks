@@ -10,8 +10,6 @@ node[:deploy].each do |application, deploy|
     next
   end
 
-  Chef::Log.debug("merge result: #{deploy.merge({:application_type => 'nodejs'})}")
-
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
