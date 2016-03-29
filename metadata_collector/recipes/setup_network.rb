@@ -65,6 +65,6 @@ end
 
 ifconfig 'interface_behind_nat' do
   device 'eth1'
-  address node["3i-mc"]["assigned_private_ip"]
+  address lazy node["3i-mc"]["assigned_private_ip"]
   onboot 'true'
 end
