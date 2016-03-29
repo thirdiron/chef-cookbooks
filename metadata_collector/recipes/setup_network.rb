@@ -16,7 +16,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
     subnet_id = 'subnet-283b7e15'
 
     # First check whether we need to do anything
-    check_command << "ifconfig -a | grep eth1 2>&1"
+    check_command = "ifconfig -a | grep eth1 2>&1"
     interface_check_shell = Mixlib::ShellOut.new(check_command)
     interface_check_shell.run_command
 
@@ -29,7 +29,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       Chef::Log.info("Network adapter already attached and configured")
       break
     else
-      create_command << "aws --region #{region} ec2 create-network-interface --subnet-id #{subnet_id} --output json"
+      create_command = "aws --region #{region} ec2 create-network-interface --subnet-id #{subnet_id} --output json"
       create_shell = Mixlib::ShellOut.new("#{create_command} 2>&1")
       create_shell.run_command
 
@@ -45,7 +45,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       node["3i-mc"]["interface_id"] = interface_id
       node["3i-mc"]["assigned_private_ip"] = assigned_private_ip
 
-      attach_command << "aws --region #{region} ec2 attach-network-interface --network-interface-id #{interface_id} --instance-id #{node["opsworks"]["instance"]["aws_instance_id"]} --device-index 1"
+      attach_command = "aws --region #{region} ec2 attach-network-interface --network-interface-id #{interface_id} --instance-id #{node["opsworks"]["instance"]["aws_instance_id"]} --device-index 1"
       attach_shell = MixLib::ShellOut.new("#{attach_command} 2>&1")
       attach_shell.run_command
 
