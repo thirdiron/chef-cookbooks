@@ -65,7 +65,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 end
 
 execute 'configure_interface' do
-  command "ifconfig eth1 #{node['3i-mc']['assigned_private_ip']}"
+  command lazy { "ifconfig eth1 #{node['3i-mc']['assigned_private_ip']}" }
   action :nothing
 end
 
