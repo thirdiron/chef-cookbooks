@@ -61,10 +61,17 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 
 
   end
+  notifies :run, 'execute[configure_interface]', :immediately
 end
 
-ifconfig 'interface_behind_nat' do
-  device 'eth1'
-  target lazy { node["3i-mc"]["assigned_private_ip"] }
-  onboot 'true'
+execute 'configure_interface' do
+  command "ifconfig eth1 #{node['3i-mc']['assigned_private_ip']}"
+  action :nothing
 end
+
+# Beats me why this doesn't work!!!
+#ifconfig 'interface_behind_nat' do
+#  device 'eth1'
+#  target lazy { node["3i-mc"]["assigned_private_ip"] }
+#  onboot 'true'
+#end
