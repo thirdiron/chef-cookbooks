@@ -25,7 +25,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       raise "command failed: " + shell.stdout
     end
 
-    if shell.exitstatus == 1 then
+    if interface_check_shell.exitstatus == 1 then
       Chef::Log.info("Network adapter already attached and configured")
       break
     else
