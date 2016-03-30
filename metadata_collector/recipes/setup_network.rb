@@ -27,7 +27,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 
     if interface_check_shell.exitstatus == 1 then
       Chef::Log.info("Network adapter already attached and configured")
-      break
+      return
     else
       create_command = "aws --region #{region} ec2 create-network-interface --subnet-id #{subnet_id} --output json"
       create_shell = Mixlib::ShellOut.new("#{create_command} 2>&1")
