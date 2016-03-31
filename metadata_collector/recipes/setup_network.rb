@@ -95,6 +95,14 @@ end
 
 ruby_block 'eth1_routing' do
   block do
+
+    show_devices_command = "ifconfig -a"
+    show_devices_shell = Mixlib::ShellOut.new("#{show_devices_command} 2>&1")
+    show_devices_shell.run_command
+
+    Chef::Log.debug("Ran command #{show_devices_command}")
+    Chef::Log.debug("Output: " + show_devices_shell.stdout)
+
     add_route_command = "ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat"
     add_route_shell = Mixlib::ShellOut.new("#{add_route_command} 2>&1")
     add_route_shell.run_command
