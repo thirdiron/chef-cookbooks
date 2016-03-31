@@ -42,8 +42,8 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       interface_id = create_output["NetworkInterface"]["NetworkInterfaceId"]
       assigned_private_ip = create_output["NetworkInterface"]["PrivateIpAddress"]
 
-      node.override["3i_mc"]["interface_id"] = interface_id
-      node.override["3i_mc"]["assigned_private_ip"] = assigned_private_ip
+#      node.override["3i_mc"]["interface_id"] = interface_id
+#      node.override["3i_mc"]["assigned_private_ip"] = assigned_private_ip
 
       attach_command = "aws --region #{region} ec2 attach-network-interface --network-interface-id #{interface_id} --instance-id #{node["opsworks"]["instance"]["aws_instance_id"]} --device-index 1"
       attach_shell = Mixlib::ShellOut.new("#{attach_command} 2>&1")
@@ -56,14 +56,16 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 
       attach_output = JSON.parse(attach_shell.stdout)
 
-#      configure_interface_command = "ifconfig eth1 #{assigned_private_ip}"
-#      configure_interface_shell = Mixlib::ShellOut.new("#{configure_interface_command} 2>&1")
-#      configure_interface_shell.run_command
-#
-#      if !configure_interface_shell.exitstatus || configure_interface_shell.exitstatus == 1 then
-#        Chef.Log('Attempt to configure interface failed')
-#        raise "#{configure_interface_command} : " + configure_interface_shell.stdout
-#      end
+      configure_interface_command = "ifconfig eth1 #{assigned_private_ip}"
+      configure_interface_shell = Mixlib::ShellOut.new("#{configure_interface_command} 2>&1")
+      Chef.Log("Running configure command: #{configure_interface_command}")
+      configure_interface_shell.run_command
+
+      if !configure_interface_shell.exitstatus || configure_interface_shell.exitstatus == 1 then
+        Chef.Log('Attempt to configure interface failed')
+        raise "#{configure_interface_command} : " + configure_interface_shell.stdout
+      end
+      Chef.Log("Configure command output:" + configure_interface_shell.stdout)
 
 
     end
@@ -73,8 +75,8 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 end
 
 # Beats me why this doesn't work!!!
-ifconfig 'interface_behind_nat' do
-  device 'eth1'
-  target lazy { node["3i_mc"]["assigned_private_ip"] }
-  onboot 'true'
-end
+#ifconfig 'interface_behind_nat' do
+#  device 'eth1'
+#  target lazy { node["3i_mc"]["assigned_private_ip"] }
+#  onboot 'true'
+#end
