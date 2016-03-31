@@ -50,7 +50,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       attach_shell.run_command
 
       if !attach_shell.exitstatus then
-        Chef.Log.fatal('Attempt to attach network interface to instance failed')
+        Chef::Log.fatal('Attempt to attach network interface to instance failed')
         raise "#{attach_command} failed: " + attach_shell.stdout
       end
 
@@ -58,14 +58,14 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 
       configure_interface_command = "ifconfig eth1 #{assigned_private_ip}"
       configure_interface_shell = Mixlib::ShellOut.new("#{configure_interface_command} 2>&1")
-      Chef.Log("Running configure command: #{configure_interface_command}")
+      Chef::Log.debug("Running configure command: #{configure_interface_command}")
       configure_interface_shell.run_command
 
       if !configure_interface_shell.exitstatus || configure_interface_shell.exitstatus == 1 then
-        Chef.Log('Attempt to configure interface failed')
+        Chef::Log.fatal('Attempt to configure interface failed')
         raise "#{configure_interface_command} : " + configure_interface_shell.stdout
       end
-      Chef.Log("Configure command output:" + configure_interface_shell.stdout)
+      Chef::Log.debug("Configure command output:" + configure_interface_shell.stdout)
 
 
     end
