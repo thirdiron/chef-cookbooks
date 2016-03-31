@@ -42,9 +42,6 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       interface_id = create_output["NetworkInterface"]["NetworkInterfaceId"]
       assigned_private_ip = create_output["NetworkInterface"]["PrivateIpAddress"]
 
-      node["3i-mc"]["interface_id"] = interface_id
-      node["3i-mc"]["assigned_private_ip"] = assigned_private_ip
-
       attach_command = "aws --region #{region} ec2 attach-network-interface --network-interface-id #{interface_id} --instance-id #{node["opsworks"]["instance"]["aws_instance_id"]} --device-index 1"
       attach_shell = MixLib::ShellOut.new("#{attach_command} 2>&1")
       attach_shell.run_command
