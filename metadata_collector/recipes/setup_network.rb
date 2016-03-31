@@ -8,6 +8,8 @@ apt_package 'awscli'
 # the IAM role assigned to the instance
 # in the right place for awscli to just use them
 
+private_subnet_gateway = '10.0.1.1'
+
 ruby_block 'ensure_interface_for_integration_traffic' do
   block do
     require 'json'
@@ -84,6 +86,29 @@ end
 execute 'ifup' do
   command 'ifup eth1'
 end
+
+template '/etc/iproute2/rt_tables' do
+  source 'rt_tables.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
+bash 'eth1_routing' do
+  code lazy { <<-SCRIPT
+    ip route add default via #{private_subnet_gateway} dev eth1 table nat
+    ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat
+    ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat
+    ip route flush cache
+    SCRIPT
+  }
+  user 'root'
+end
+
+
+
+
+
 
 # Beats me why this doesn't work!!!
 #ifconfig 'interface_behind_nat' do
