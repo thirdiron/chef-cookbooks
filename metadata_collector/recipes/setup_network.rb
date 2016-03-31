@@ -93,16 +93,37 @@ template '/etc/iproute2/rt_tables' do
   mode '0644'
 end
 
-bash 'eth1_routing' do
-  code lazy { <<-SCRIPT
-    echo "ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat"
-    ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat
-    ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat
-    ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat
-    ip route flush cache
-    SCRIPT
-  }
-  user 'root'
+ruby_block 'eth1_routing' do
+  block do
+    add_route_command = "ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat"
+    add_route_shell = Mixlib::ShellOut.new("#{add_route_command} 2>&1")
+    add_route_shell.run_command
+    
+    Chef::Log.debug("Ran command #{add_route_command}")
+    Chef::Log.debug("Output: " + add_route_shell.output)
+
+    from_rule_command = "ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat"
+    from_rule_shell = Mixlib::ShellOut.new("#{from_rule_command} 2>&1")
+    from_rule_shell.run_command
+
+    Chef::Log.debug("Ran command #{from_rule_command}")
+    Chef::Log.debug("Output: " + from_rule_shell.output)
+
+    to_rule_command = "ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat"
+    to_rule_shell = Mixlib::ShellOut.new("#{to_rule_command} 2>&1")
+    to_rule_shell.run_command
+
+    Chef::Log.debug("Ran command #{to_rule_command}")
+    Chef::Log.debug("Output: " + to_rule_shell.output)
+
+    flush_command = "ip route flush cache"
+    flush_shell = Mixlib::ShellOut.new("#{flush_command} 2>&1")
+    flush_shell.run_command
+
+    Chef::Log.debug("Ran command #{flush_command}")
+    Chef::Log.debug("Output: " + flush_shell.output)
+
+  end
 end
 
 
