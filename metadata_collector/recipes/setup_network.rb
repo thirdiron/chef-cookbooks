@@ -8,14 +8,13 @@ apt_package 'awscli'
 # the IAM role assigned to the instance
 # in the right place for awscli to just use them
 
-private_subnet_gateway = '10.0.1.1'
 
 ruby_block 'ensure_interface_for_integration_traffic' do
   block do
     require 'json'
 
     region = 'us-east-1'
-    subnet_id = 'subnet-283b7e15'
+    subnet_id = node['3i_mc']['private_subnet_id']
 
     # First check whether we need to do anything
     check_command = "ifconfig -a | grep eth1 2>&1"
@@ -96,7 +95,7 @@ end
 
 bash 'eth1_routing' do
   code lazy { <<-SCRIPT
-    ip route add default via #{private_subnet_gateway} dev eth1 table nat
+    ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat
     ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat
     ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat
     ip route flush cache
