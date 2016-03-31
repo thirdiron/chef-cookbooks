@@ -56,17 +56,20 @@ ruby_block 'ensure_interface_for_integration_traffic' do
 
       attach_output = JSON.parse(attach_shell.stdout)
 
+      configure_interface_command = "ifconfig eth1 #{assigned_private_ip}"
+      configure_interface_shell = MixLib::ShellOut.new("#{configure_interface_command} 2>&1")
+      configure_interface_shell.run_command
+
+      if !configure_interface_shell.exitstatus || configure_interface_shell.exitstatus == 1 then
+        Chef.Log('Attempt to configure interface failed')
+        raise "#{configure_interface_command} : " + configure_interface_shell.stdout
+      end
+
 
     end
 
 
   end
-  notifies :run, 'execute[configure_interface]', :immediately
-end
-
-execute 'configure_interface' do
-  command lazy { "ifconfig eth1 #{node['3i-mc']['assigned_private_ip']}" }
-  action :nothing
 end
 
 # Beats me why this doesn't work!!!
