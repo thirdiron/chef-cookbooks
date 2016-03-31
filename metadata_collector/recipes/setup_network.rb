@@ -43,7 +43,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       assigned_private_ip = create_output["NetworkInterface"]["PrivateIpAddress"]
 
       attach_command = "aws --region #{region} ec2 attach-network-interface --network-interface-id #{interface_id} --instance-id #{node["opsworks"]["instance"]["aws_instance_id"]} --device-index 1"
-      attach_shell = MixLib::ShellOut.new("#{attach_command} 2>&1")
+      attach_shell = Mixlib::ShellOut.new("#{attach_command} 2>&1")
       attach_shell.run_command
 
       if !attach_shell.exitstatus then
@@ -54,7 +54,7 @@ ruby_block 'ensure_interface_for_integration_traffic' do
       attach_output = JSON.parse(attach_shell.stdout)
 
       configure_interface_command = "ifconfig eth1 #{assigned_private_ip}"
-      configure_interface_shell = MixLib::ShellOut.new("#{configure_interface_command} 2>&1")
+      configure_interface_shell = Mixlib::ShellOut.new("#{configure_interface_command} 2>&1")
       configure_interface_shell.run_command
 
       if !configure_interface_shell.exitstatus || configure_interface_shell.exitstatus == 1 then
