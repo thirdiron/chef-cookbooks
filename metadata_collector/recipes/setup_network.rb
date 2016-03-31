@@ -95,6 +95,7 @@ end
 
 bash 'eth1_routing' do
   code lazy { <<-SCRIPT
+    echo "ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat"
     ip route add default via #{node['3i_mc']['private_subnet_gateway']} dev eth1 table nat
     ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat
     ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat
