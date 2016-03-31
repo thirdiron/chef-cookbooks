@@ -82,9 +82,10 @@ template '/etc/network/interfaces.d/eth1.cfg' do
   mode '0644'
 end
 
-execute 'ifup' do
-  command 'ifup eth1'
-end
+# Somehow the results of this command weren't ready by the time the commands in the ruby block below execute
+#execute 'ifup' do
+#  command 'ifup eth1'
+#end
 
 template '/etc/iproute2/rt_tables' do
   source 'rt_tables.erb'
@@ -95,6 +96,13 @@ end
 
 ruby_block 'eth1_routing' do
   block do
+
+    ifup_command = "ifup eth1"
+    ifup_shell = Mixlib::ShellOut.new("#{ifup_command} 2>&1")
+    ifup_shell.run_command
+
+    Chef::Log.debug("Ran command #{ifup_command}")
+    Chef::Log.debug("Output: " + ifup_command.stdout)
 
     show_devices_command = "ifconfig -a"
     show_devices_shell = Mixlib::ShellOut.new("#{show_devices_command} 2>&1")
