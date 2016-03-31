@@ -100,28 +100,28 @@ ruby_block 'eth1_routing' do
     add_route_shell.run_command
     
     Chef::Log.debug("Ran command #{add_route_command}")
-    Chef::Log.debug("Output: " + add_route_shell.output)
+    Chef::Log.debug("Output: " + add_route_shell.stdout)
 
     from_rule_command = "ip rule add from #{node['3i_mc']['assigned_private_ip']}/32 table nat"
     from_rule_shell = Mixlib::ShellOut.new("#{from_rule_command} 2>&1")
     from_rule_shell.run_command
 
     Chef::Log.debug("Ran command #{from_rule_command}")
-    Chef::Log.debug("Output: " + from_rule_shell.output)
+    Chef::Log.debug("Output: " + from_rule_shell.stdout)
 
     to_rule_command = "ip rule add to #{node['3i_mc']['assigned_private_ip']}/32 table nat"
     to_rule_shell = Mixlib::ShellOut.new("#{to_rule_command} 2>&1")
     to_rule_shell.run_command
 
     Chef::Log.debug("Ran command #{to_rule_command}")
-    Chef::Log.debug("Output: " + to_rule_shell.output)
+    Chef::Log.debug("Output: " + to_rule_shell.stdout)
 
     flush_command = "ip route flush cache"
     flush_shell = Mixlib::ShellOut.new("#{flush_command} 2>&1")
     flush_shell.run_command
 
     Chef::Log.debug("Ran command #{flush_command}")
-    Chef::Log.debug("Output: " + flush_shell.output)
+    Chef::Log.debug("Output: " + flush_shell.stdout)
 
   end
 end
