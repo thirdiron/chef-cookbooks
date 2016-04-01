@@ -104,8 +104,11 @@ ruby_block 'eth1_routing' do
     check_file_shell = Mixlib::ShellOut.new("#{check_file_command} 2>&1")
     check_file_shell.run_command
 
-    # Maybe these commands are running so fast the network interface
-    # isn't really ready.  Sleep
+    # These commands are running so fast the network interface
+    # isn't really ready when the script runs this second
+    # batch of commands.  Sleep 10 seconds to let Amazon do whatever
+    # it needs to do with the nic before running these commands to 
+    # configure routing table & routing rules
     
     sleep(10)
     Chef::Log.debug("Ran command #{check_file_command}")
