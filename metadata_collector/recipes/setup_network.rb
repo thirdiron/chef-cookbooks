@@ -100,6 +100,13 @@ end
 ruby_block 'eth1_routing' do
   block do
 
+    check_file_command = "cat /etc/network/interfaces.d/eth1.cfg"
+    check_file_shell = Mixlib::ShellOut.new("#{check_file_command} 2>&1")
+    check_file_shell.run_command
+
+    Chef::Log.debug("Ran command #{check_file_command}")
+    Chef::Log.debug("Output: " + check_file_shell.stdout)
+
     ifup_command = "ifup eth1"
     ifup_shell = Mixlib::ShellOut.new("#{ifup_command} 2>&1")
     ifup_shell.run_command
