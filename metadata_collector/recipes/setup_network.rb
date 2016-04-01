@@ -140,6 +140,7 @@ ruby_block 'eth1_routing' do
     Chef::Log.debug("Output: " + flush_shell.stdout)
 
   end
+  notifies :create, 'template[/etc/network/interfaces.d/eth1.cfg]', :before
 end
 
 
