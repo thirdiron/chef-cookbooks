@@ -104,6 +104,10 @@ ruby_block 'eth1_routing' do
     check_file_shell = Mixlib::ShellOut.new("#{check_file_command} 2>&1")
     check_file_shell.run_command
 
+    # Maybe these commands are running so fast the network interface
+    # isn't really ready.  Sleep
+    
+    sleep(10)
     Chef::Log.debug("Ran command #{check_file_command}")
     Chef::Log.debug("Output: " + check_file_shell.stdout)
 
