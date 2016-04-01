@@ -102,7 +102,7 @@ ruby_block 'eth1_routing' do
     ifup_shell.run_command
 
     Chef::Log.debug("Ran command #{ifup_command}")
-    Chef::Log.debug("Output: " + ifup_command.stdout)
+    Chef::Log.debug("Output: " + ifup_shell.stdout)
 
     show_devices_command = "ifconfig -a"
     show_devices_shell = Mixlib::ShellOut.new("#{show_devices_command} 2>&1")
