@@ -80,6 +80,7 @@ template '/etc/network/interfaces.d/eth1.cfg' do
   owner 'root'
   group 'root'
   mode '0644'
+  notifies :create, 'template[/etc/iproute2/rt_tables]', :immediately
 end
 
 # Somehow the results of this command weren't ready by the time the commands in the ruby block below execute
@@ -92,6 +93,8 @@ template '/etc/iproute2/rt_tables' do
   owner 'root'
   group 'root'
   mode '0644'
+  action :nothing
+  notifies :run, 'ruby_block[eth1_routing]', :immediately
 end
 
 ruby_block 'eth1_routing' do
@@ -140,7 +143,7 @@ ruby_block 'eth1_routing' do
     Chef::Log.debug("Output: " + flush_shell.stdout)
 
   end
-  notifies :create, 'template[/etc/network/interfaces.d/eth1.cfg]', :before
+  action :nothing
 end
 
 
