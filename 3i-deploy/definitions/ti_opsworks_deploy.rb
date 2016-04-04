@@ -104,53 +104,7 @@ define :ti_opsworks_deploy do
       before_migrate do
         link_tempfiles_to_current_release
 
-        if deploy[:application_type] == 'rails'
-          if deploy[:auto_bundle_on_deploy]
-            OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
-          end
-
-          node.default[:deploy][application][:database][:adapter] = OpsWorks::RailsConfiguration.determine_database_adapter(
-            application,
-            node[:deploy][application],
-            release_path,
-            :force => node[:force_database_adapter_detection],
-            :consult_gemfile => node[:deploy][application][:auto_bundle_on_deploy]
-          )
-          template "#{node[:deploy][application][:deploy_to]}/shared/config/database.yml" do
-            cookbook "rails"
-            source "database.yml.erb"
-            mode "0660"
-            owner node[:deploy][application][:user]
-            group node[:deploy][application][:group]
-            variables(
-              :database => node[:deploy][application][:database],
-              :environment => node[:deploy][application][:rails_env]
-            )
-
-            only_if do
-              deploy[:database][:host].present?
-            end
-          end.run_action(:create)
-        elsif deploy[:application_type] == 'aws-flow-ruby'
-          OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
-        elsif deploy[:application_type] == 'php'
-          template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
-            cookbook 'php'
-            source 'opsworks.php.erb'
-            mode '0660'
-            owner node[:deploy][application][:user]
-            group node[:deploy][application][:group]
-            variables(
-              :database => node[:deploy][application][:database],
-              :memcached => node[:deploy][application][:memcached],
-              :layers => node[:opsworks][:layers],
-              :stack_name => node[:opsworks][:stack][:name]
-            )
-            only_if do
-              File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
-            end
-          end
-        elsif deploy[:application_type] == 'nodejs' || ( deploy[:application_type] == 'other' && deploy['environment_variables']['OPSWORKS_APPLICATION_TYPE'].include?("nodejs"))
+        if deploy[:application_type] == 'nodejs' || ( deploy[:application_type] == 'other' && deploy['environment_variables']['OPSWORKS_APPLICATION_TYPE'].include?("nodejs"))
           # by convention, if application_type is other, look in the
           # OPSWORKS_APPLICATION_TYPE environment variable.  If 
           # the value contains "nodejs" it's a custom nodeJS setup and
