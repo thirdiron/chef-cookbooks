@@ -38,12 +38,13 @@ node[:deploy].each do |application, deploy|
   end
 
   template "/home/ubuntu/profile.d/#{application}_profile" do
-    source 'cli-bash_profile.erb'
+    source 'cli-.bash_profile.erb'
     owner 'ubuntu'
     group 'ubuntu'
     mode '0644'
     variables(
-      :deploy => deploy
+      :deploy => deploy,
+      :application_name => application
     )
   end
 
