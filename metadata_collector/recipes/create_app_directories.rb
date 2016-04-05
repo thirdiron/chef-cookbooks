@@ -1,3 +1,10 @@
+directory '/var/log/metadata_collector' do
+  owner 'ubuntu'
+  group 'ubuntu'
+  mode '0755'
+  action :create
+end
+
 directory '/var/log/metadata_collector/ManualPulls' do
   owner 'ubuntu'
   group 'ubuntu'
