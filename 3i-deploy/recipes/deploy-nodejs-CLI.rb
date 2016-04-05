@@ -43,7 +43,7 @@ node[:deploy].each do |application, deploy|
     group 'ubuntu'
     mode '0644'
     variables(
-      :application_bin_path => ::File.join(deploy[:deploy_to], "current", "bin"),
+      :deploy => deploy,
       :application_name => application
     )
   end
