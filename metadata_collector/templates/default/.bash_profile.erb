@@ -1,0 +1,7 @@
+for script in /home/ubuntu/profile.d/* ; do
+
+  if [ -r $script ] ; then
+    . $script
+  fi
+
+done

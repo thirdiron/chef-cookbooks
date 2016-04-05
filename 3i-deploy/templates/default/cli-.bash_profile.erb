@@ -1,1 +1,1 @@
-export PATH=$PATH:/srv/www/<%= application %>/current/bin
+export PATH=$PATH:<%= ::File.join(deploy[:deploy_to], "current", "bin") %>

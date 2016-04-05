@@ -37,5 +37,15 @@ node[:deploy].each do |application, deploy|
     environment_variables deploy[:environment_variables]
   end
 
+  template "/home/ubuntu/profile.d/#{application}_profile" do
+    source 'cli-bash_profile.erb'
+    owner 'ubuntu'
+    group 'ubuntu'
+    mode '0644'
+    variables(
+      :deploy => deploy
+    )
+  end
+
 end
 
