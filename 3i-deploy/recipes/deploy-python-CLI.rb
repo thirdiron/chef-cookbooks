@@ -43,6 +43,12 @@ node[:deploy].each do |application, deploy|
     )
   end
 
+  # ensure ubuntu user is in the staff group so it can install python packages
+  execute 'add_user_to_group' do
+    command 'usermode -a -G staff ubuntu'
+    user 'root'
+  end
+
   execute 'run setup script' do
     cwd ::File.join(deploy[:deploy_to], "current")
     command "#{deploy[:deploy_to]}/current/setup.sh"
