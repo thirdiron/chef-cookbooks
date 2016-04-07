@@ -8,3 +8,6 @@ apt_package 'libxml2-utils'
 
 # pygmentize for some nice xml coloring
 apt_package 'python-pygments'
+
+# Need pip for bzsales_reports
+apt_package 'python-pip'
