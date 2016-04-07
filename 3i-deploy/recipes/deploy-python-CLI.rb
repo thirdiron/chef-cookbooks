@@ -43,5 +43,11 @@ node[:deploy].each do |application, deploy|
     )
   end
 
+  execute 'run setup script' do
+    cwd ::File.join(deploy[:deploy_to], "current")
+    command 'setup.sh'
+    only_if '[ -f setup.sh ]'
+  end
+
 end
 
