@@ -11,3 +11,5 @@ apt_package 'python-pygments'
 
 # Need pip for bzsales_reports
 apt_package 'python-pip'
+
+apt_package 'python-virtualenv'
