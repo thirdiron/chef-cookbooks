@@ -8,11 +8,11 @@
 # rubygems during machine setup
 
 execute 'install_updater_gem' do
-  command 'gem install rubygems-update'
-  user 'root'
+  command 'sudo gem install rubygems-update'
+  user 'ubuntu'
 end
 
 execute 'update_rubygems' do
-  command 'update_rubygems'
-  user 'root'
+  command 'sudo update_rubygems'
+  user 'ubuntu'
 end
