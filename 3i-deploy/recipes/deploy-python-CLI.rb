@@ -47,6 +47,7 @@ node[:deploy].each do |application, deploy|
     cwd ::File.join(deploy[:deploy_to], "current")
     command "#{deploy[:deploy_to]}/current/setup.sh"
     only_if "[ -f #{deploy[:deploy_to]}/current/setup.sh ]"
+    user 'ubuntu'
   end
 
 end
