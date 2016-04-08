@@ -13,3 +13,7 @@ apt_package 'python-pygments'
 apt_package 'python-pip'
 
 apt_package 'python-virtualenv'
+
+# Some of the pip modules have C build steps that
+# seem to link to python libraries
+apt_package 'python-dev'
