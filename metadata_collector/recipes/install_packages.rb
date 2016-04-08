@@ -17,3 +17,7 @@ apt_package 'python-virtualenv'
 # Some of the pip modules have C build steps that
 # seem to link to python libraries
 apt_package 'python-dev'
+
+# this also installs a package that one of the pip
+# modules builds against
+apt_package 'libffi-dev'
