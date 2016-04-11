@@ -61,7 +61,7 @@ node[:deploy].each do |application, deploy|
   # Then copy in place a crontab from the repo if one was provided
   execute 'setup crontab' do
     command <<-COMMANDS
-      cp #{deploy[:deploy_to]}/current/crontab /etc/cron.d/#{application}_crontab";
+      cp #{deploy[:deploy_to]}/current/crontab /etc/cron.d/#{application}_crontab;
       chown root:root /etc/cron.d/#{application}_crontab;
     COMMANDS
     only_if "[ -f #{deploy[:deploy_to]}/current/crontab ]"
