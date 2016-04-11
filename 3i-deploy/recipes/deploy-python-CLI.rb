@@ -50,5 +50,25 @@ node[:deploy].each do |application, deploy|
     user 'deploy'
   end
 
+  # Allow an application to provide a crontab.  
+  # If present copy it into place in /etc/cron.d
+  # using the application's name to generate the name
+  # for the crontab
+
+  # First remove any crontab from previous deploys
+  file "/etc/cron.d/#{application}_crontab" do
+    action :delete
+  end
+
+  # Then copy in place a crontab from the repo if one was provided
+  execute 'setup crontab' do
+    command <<-COMMANDS
+      cp #{deploy[:deploy_to]}/current/crontab /etc/cron.d/#{application}_crontab";
+      chown root:root /etc/cron.d/#{application}_crontab;
+    COMMANDS
+    only_if "[ -f #{deploy[:deploy_to]}/current/crontab ]"
+    user 'root'
+  end
+
 end
 
