@@ -1,3 +1,9 @@
+
+i# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
 for script in /home/ubuntu/profile.d/* ; do
 
   if [ -r $script ] ; then

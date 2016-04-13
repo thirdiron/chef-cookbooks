@@ -11,3 +11,13 @@ template '/home/ubuntu/.bash_profile' do
   group 'ubuntu'
   mode '0644'
 end
+
+template '/home/ubuntu/.bashrc' do
+  source '.bashrc.erb'
+  owner 'ubuntu'
+  group 'ubuntu'
+  mode '0644'
+  variables ({
+    :redis_password => node['3i_mc']['redis_password']
+  })
+end
