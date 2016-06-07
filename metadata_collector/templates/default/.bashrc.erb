@@ -113,4 +113,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias flush='redis-cli -h pub-redis-15945.us-east-1-1.2.ec2.garantiadata.com -p 15945 -a <%= @redis_password %> flushall'
+alias flush='redis-cli -h <%= @redis_host %> -p <%= @redis_port %> -a <%= @redis_password %> flushall'

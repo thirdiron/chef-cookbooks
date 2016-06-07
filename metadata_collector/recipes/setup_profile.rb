@@ -18,6 +18,8 @@ template '/home/ubuntu/.bashrc' do
   group 'ubuntu'
   mode '0644'
   variables ({
+    :redis_host => node['3i_mc']['redis_host'],
+    :redis_port => node['3i_mc']['redis_port'],
     :redis_password => node['3i_mc']['redis_password']
   })
 end
