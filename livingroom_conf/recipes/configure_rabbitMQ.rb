@@ -89,7 +89,7 @@ template "/etc/rsyslog.d/70-rabbitmq.conf" do
   mode '0644'
   variables(
     :hostname => node["opsworks"]["instance"]["hostname"],
-    :logentries_token => "ef2fb4d0-32f6-4444-bc55-73adbb22e899"
+    :logentries_token => node["rabbitmq-settings"]["logentries-token"]
   )
   notifies :restart, "service[rsyslog]", :immediately
 end
