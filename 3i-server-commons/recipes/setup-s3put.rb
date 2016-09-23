@@ -1,6 +1,7 @@
 git "#{Chef::Config[:file_cache_path]}/s3put" do
   repository 'git@github.com:thirdiron/s3put.git'
   reference 'v0.1'
+  user 'deploy'
   action :sync
 end
 
