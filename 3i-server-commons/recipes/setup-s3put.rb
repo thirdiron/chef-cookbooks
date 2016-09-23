@@ -1,4 +1,4 @@
-git "#{Chef::Config[:file_cache_path]}/s3put" do
+git "/tmp/s3put" do
   repository 'git@github.com:thirdiron/s3put.git'
   reference 'v0.1'
   user 'deploy'
@@ -6,7 +6,7 @@ git "#{Chef::Config[:file_cache_path]}/s3put" do
 end
 
 bash 'install_s3put' do
-  cwd '#{Chef::Config[:file_cache_path]}/s3put'
+  cwd '/tmp/s3put'
   user 'root'
   group 'root'
   code <<-EOH
