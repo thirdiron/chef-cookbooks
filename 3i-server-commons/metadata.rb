@@ -1,0 +1,7 @@
+name '3i-server-commons'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures 3i-server-commons'
+long_description 'Installs/Configures 3i-server-commons'
+version '0.1.0'
