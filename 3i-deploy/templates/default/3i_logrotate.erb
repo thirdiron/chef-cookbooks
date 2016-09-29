@@ -9,7 +9,7 @@
         sharedscripts
         <% if defined? @log_archive_bucket %>
         prerotate
-          beforeRotateLog.sh $1 <%= @log_archive_bucket %>
+          beforeRotateLog.sh <%= @log_archive_bucket %> $1
         endscript
         <% end -%>
         <% if (node[:platform] == 'ubuntu' && node[:platform_version] == '14.04') || rhel7? -%>
