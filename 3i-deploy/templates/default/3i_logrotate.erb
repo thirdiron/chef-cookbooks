@@ -1,0 +1,18 @@
+<% @log_dirs.each do |dir| %><%= dir %>/*.log <% end %> {
+        daily
+        missingok
+        rotate <%= node[:logrotate][:rotate] %>
+        compress
+        delaycompress
+        notifempty
+        copytruncate
+        sharedscripts
+        <% if defined? @log_archive_bucket %>
+        prerotate
+          beforeRotateLog.sh $1 <%= @log_archive_bucket %>
+        endscript
+        <% end -%>
+        <% if (node[:platform] == 'ubuntu' && node[:platform_version] == '14.04') || rhel7? -%>
+        su root root
+        <% end -%>
+}

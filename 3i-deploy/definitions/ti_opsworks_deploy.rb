@@ -160,12 +160,15 @@ define :ti_opsworks_deploy do
 
   template "/etc/logrotate.d/opsworks_app_#{application}" do
     backup false
-    source "logrotate.erb"
-    cookbook 'deploy'
+    source "3i_logrotate.erb"
+    cookbook '3i-deploy'
     owner "root"
     group "root"
     mode 0644
-    variables( :log_dirs => ["#{deploy[:deploy_to]}/shared/log" ] )
+    variables( 
+      :log_dirs => ["#{deploy[:deploy_to]}/shared/log" ],
+      :log_archive_bucket => deploy[:environment_variables]['LOG_ARCHIVE_BUCKET'] 
+    )
   end
 end
 
