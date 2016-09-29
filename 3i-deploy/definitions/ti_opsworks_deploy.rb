@@ -167,7 +167,8 @@ define :ti_opsworks_deploy do
     mode 0644
     variables( 
       :log_dirs => ["#{deploy[:deploy_to]}/shared/log" ],
-      :log_archive_bucket => deploy[:environment_variables]['LOG_ARCHIVE_BUCKET'] 
+      :log_archive_bucket => deploy[:environment_variables]['LOG_ARCHIVE_BUCKET'],
+      :log_rotate_count => defined? deploy[:environment_variables]['LOG_ROTATE_COUNT'] ? deploy[:environment_variables]['LOG_ROTATE_COUNT'] : node[:logrotate][:rotate]
     )
   end
 end
