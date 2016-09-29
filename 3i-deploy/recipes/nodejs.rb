@@ -3,7 +3,7 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  if deploy[:application_type] != 'nodejs'
+  if deploy[:application_type] != 'nodejs' && deploy['environment_variables']['OPSWORKS_APPLICATION_TYPE'] != 'nodejs-web'
     Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
     next
   end
@@ -27,7 +27,7 @@ node[:deploy].each do |application, deploy|
   # npm install, perform backups, set up
   # log rotation etc. just like the 
   # default cookbook
-  opsworks_deploy do
+  ti_opsworks_deploy do
     deploy_data deploy
     app application
   end
