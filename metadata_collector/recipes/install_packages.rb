@@ -18,9 +18,10 @@ apt_package 'python-virtualenv'
 # seem to link to python libraries
 apt_package 'python-dev'
 
-# this also installs a package that one of the pip
+# these also installs a package that one of the pip
 # modules builds against
 apt_package 'libffi-dev'
+apt_package 'libssl-dev'
 
 # Need the redis CLI so ops can flush redis cache after manual pulls
 apt_package 'redis-tools'
