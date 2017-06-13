@@ -15,5 +15,5 @@ do
   cp $filePath /tmp/$archivalname
   gzip /tmp/$archivalname
 
-  # s3put $bucket /tmp/${archivalname}.gz
+  s3put $bucket /tmp/${archivalname}.gz
 done
