@@ -4,7 +4,7 @@ node[:deploy].each do |application, deploy|
   git "/tmp/s3put" do
     repository 'git@github.com:thirdiron/s3put.git'
     reference 'v0.1'
-    user 'deploy'
+    user 'root'
     action :sync
   end
 
@@ -16,5 +16,5 @@ node[:deploy].each do |application, deploy|
       make install
       EOH
   end
-  
+
 end
