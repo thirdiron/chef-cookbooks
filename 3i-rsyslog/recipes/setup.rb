@@ -14,6 +14,9 @@ end
 # install v8
 apt_package 'rsyslog'
 
+# install something to clean up old logs that may be moved to tmp
+apt_package 'tmpreaper'
+
 # Add the syslog user to the www-data group
 # So it can reach standard opsworks deployed
 # logs
@@ -22,6 +25,3 @@ execute 'add_user_to_group' do
   command 'usermod -a -G www-data syslog'
   user 'root'
 end
-
-
-
