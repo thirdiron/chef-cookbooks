@@ -42,8 +42,13 @@ node[:deploy].each do |application, deploy|
     notifies :restart, "service[rsyslog]", :immediately
   end
 
+  execute 'remove_old_process_if_exists' do
+    command "pm2 delete #{application} || true"
+    user 'ubuntu'
+  end
+
   execute 'start_or_restart_cronjs' do
-    command "env HOME=`eval echo \"~ubuntu\"` pm2 startOrReload #{deploy[:deploy_to]}/current/pm2-app.json"
+    command "env HOME=`eval echo \"~ubuntu\"` pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
     user 'ubuntu'
   end
 
