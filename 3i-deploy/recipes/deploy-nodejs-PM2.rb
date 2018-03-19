@@ -43,7 +43,7 @@ node[:deploy].each do |application, deploy|
   end
 
   execute 'remove_old_process_if_exists' do
-    command "pm2 delete #{application} || true"
+    command "env HOME=`eval echo \"~ubuntu\"` pm2 delete #{application} || true"
     user 'ubuntu'
   end
 
