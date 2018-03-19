@@ -1,5 +1,5 @@
 nodejs_npm "pm2" do
-  version "1.0.2"
+  version "2.10.1"
 end
 
 execute "setup-pm2-startup-script" do
