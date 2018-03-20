@@ -3,6 +3,6 @@ nodejs_npm "pm2" do
 end
 
 execute "setup-pm2-startup-script" do
-  command 'env PATH=$PATH:/usr/bin pm2 startup ubuntu -u ubuntu --hp /home/ubuntu'
+  command 'env PATH=$PATH:/usr/bin pm2 startup -u ubuntu --hp /home/ubuntu'
   user 'root'
 end
