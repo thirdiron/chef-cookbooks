@@ -8,7 +8,7 @@ execute "setup-pm2-startup-script" do
 end
 
 execute "link-pm2-to-keymetrics" do
-  command 'pm2 link #{node["keymetrics"]["secret-key"]} #{node["keymetrics"]["public-key"]}'
+  command "pm2 link #{node['keymetrics']['secret-key']} #{node['keymetrics']['public-key']}"
   user 'ubuntu'
 end
 
