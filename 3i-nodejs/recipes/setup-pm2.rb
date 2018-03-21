@@ -10,9 +10,11 @@ end
 execute "link-pm2-to-keymetrics" do
   command "pm2 link #{node['keymetrics']['secret-key']} #{node['keymetrics']['public-key']}"
   user 'ubuntu'
+  environment ({'HOME' => '/home/ubuntu'})
 end
 
 execute "setup-keymetrics-server-monitoring" do
   command 'pm2 install pm2-server-monit'
   user 'ubuntu'
+  environment ({'HOME' => '/home/ubuntu'})
 end
