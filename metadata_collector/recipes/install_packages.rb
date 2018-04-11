@@ -23,5 +23,9 @@ apt_package 'python-dev'
 apt_package 'libffi-dev'
 apt_package 'libssl-dev'
 
+# installs a package that bzsales_reports needs for the 
+# global usage report, which queries the prod database
+apt_package 'libpq-dev'
+
 # Need the redis CLI so ops can flush redis cache after manual pulls
 apt_package 'redis-tools'
