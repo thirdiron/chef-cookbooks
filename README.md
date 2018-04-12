@@ -11,6 +11,7 @@ Relevant Devtools:
 
 1. Make a change to the cookbook and commit the change directly to `master`
 2. Inside the AWS Console's Opsworks UI, choose the applicable stack, click "Run Command", and run the "Update Custom Cookbooks" command
+3. Execute the desired updated recipe using the "Execute Recipes" command
 
 ## How to update Opsworks-managed machines when changing these cookbooks and you need to run Setup
 
