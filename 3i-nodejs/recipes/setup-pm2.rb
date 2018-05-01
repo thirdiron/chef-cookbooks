@@ -28,3 +28,9 @@ execute "setup-keymetrics-server-monitoring" do
   user 'ubuntu'
   environment ({'HOME' => '/home/ubuntu'})
 end
+
+execute "install-pm2-typescript-runner" do
+  command 'pm2 install typescript'
+  user 'ubuntu'
+  environment ({'HOME' => '/home/ubuntu'})
+end
