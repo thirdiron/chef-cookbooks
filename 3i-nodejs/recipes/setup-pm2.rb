@@ -25,7 +25,7 @@ end
 
 execute "setup-keymetrics-server-monitoring" do
   command 'pm2 install pm2-server-monit'
-  user 'ubuntu'
+  user 'root'
   environment ({'HOME' => '/home/ubuntu'})
 end
 
