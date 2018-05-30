@@ -24,9 +24,16 @@ execute "link-pm2-to-keymetrics" do
 end
 
 execute "setup-keymetrics-server-monitoring" do
-  command 'pm2 install pm2-server-monit'
+  command 'pm2 install thirdiron/pm2-server-monit && pm2 set pm2-server-monit:small_interval 10'
   user 'root'
   environment ({'HOME' => '/home/ubuntu'})
+end
+
+execute "configure-pm2-server-monit-CPU-alert-threshold" do
+  command 'pm2 set pm2-server-monit:cpu_percent_usage_alert_threshold ' + deploy['environment_variables']['CPU_PERCENT_USAGE_ALERT_THRESHOLD']
+  user 'root'
+  environment ({'HOME' => '/home/ubuntu'})
+  only_if deploy['environment_variables']['CPU_PERCENT_USAGE_ALERT_THRESHOLD']
 end
 
 execute "install-pm2-typescript-runner" do
