@@ -30,7 +30,7 @@ execute "setup-keymetrics-server-monitoring" do
 end
 
 execute "configure-pm2-server-monit-CPU-alert-threshold" do
-  command 'pm2 set pm2-server-monit:cpu_percent_usage_alert_threshold ' + deploy['environment_variables']['CPU_PERCENT_USAGE_ALERT_THRESHOLD']
+  command "pm2 set pm2-server-monit:cpu_percent_usage_alert_threshold #{deploy['environment_variables']['CPU_PERCENT_USAGE_ALERT_THRESHOLD']}"
   user 'root'
   environment ({'HOME' => '/home/ubuntu'})
   only_if { deploy['environment_variables']['CPU_PERCENT_USAGE_ALERT_THRESHOLD'] }
