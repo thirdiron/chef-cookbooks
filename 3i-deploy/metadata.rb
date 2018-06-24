@@ -8,3 +8,4 @@ version '0.1.0'
 
 # Depends on opsworks deploy cookbook
 depends 'deploy', '~> 1.0.0'
+depends 'slack', '~> 0.1.3'
