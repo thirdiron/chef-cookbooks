@@ -3,4 +3,4 @@ source "https://supermarket.chef.io"
 metadata
 
 cookbook 'deploy', '~> 1.0.0'
-cookbook 'slack', '~> 0.1.3'
+cookbook 'slack', '~> 0.1.0'
