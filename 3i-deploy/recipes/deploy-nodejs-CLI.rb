@@ -58,6 +58,12 @@ node[:deploy].each do |application, deploy|
     action :delete
   end
 
+  execute 'build' do
+    command 'npm run build'
+    if { deploy['environment_variables']['REQUIRES_BUILD'] == 'true' }
+    user 'ubuntu'
+  end
+
   # Then copy in place a crontab from the repo if one was provided
   execute 'setup crontab' do
     command <<-COMMANDS
