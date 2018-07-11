@@ -60,7 +60,7 @@ node[:deploy].each do |application, deploy|
 
   execute 'build' do
     command 'npm run build'
-    if { deploy['environment_variables']['REQUIRES_BUILD'] == 'true' }
+    only_if { deploy['environment_variables']['REQUIRES_BUILD'] == 'true' }
     user 'ubuntu'
   end
 
