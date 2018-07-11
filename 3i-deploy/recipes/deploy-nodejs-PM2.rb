@@ -48,7 +48,7 @@ node[:deploy].each do |application, deploy|
   end
 
   execute 'build' do
-    command 'npm run build'
+    command "cd #{deploy[:deploy_to]}/current && npm run build"
     only_if { deploy['environment_variables']['REQUIRES_BUILD'] == 'true' }
     user 'root'
   end
