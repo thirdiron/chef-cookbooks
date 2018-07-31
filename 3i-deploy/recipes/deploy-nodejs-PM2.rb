@@ -47,6 +47,12 @@ node[:deploy].each do |application, deploy|
     user 'ubuntu'
   end
 
+  execute 'build' do
+    command "cd #{deploy[:deploy_to]}/current && npm run build"
+    only_if { deploy['environment_variables']['REQUIRES_BUILD'] == 'true' }
+    user 'root'
+  end
+
   execute 'start_or_restart_cronjs' do
     command "env HOME=`eval echo \"~ubuntu\"` pm2 startOrRestart #{deploy[:deploy_to]}/current/pm2-app.json"
     not_if { deploy['environment_variables']['DISABLED'] == "true" }

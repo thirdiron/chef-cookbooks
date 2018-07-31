@@ -22,15 +22,3 @@ execute "link-pm2-to-keymetrics" do
   user 'ubuntu'
   environment ({'HOME' => '/home/ubuntu'})
 end
-
-execute "setup-keymetrics-server-monitoring" do
-  command 'pm2 install pm2-server-monit'
-  user 'root'
-  environment ({'HOME' => '/home/ubuntu'})
-end
-
-execute "install-pm2-typescript-runner" do
-  command 'pm2 install typescript'
-  user 'root'
-  environment ({'HOME' => '/home/ubuntu'})
-end
