@@ -68,6 +68,15 @@ node[:deploy].each do |application, deploy|
   end
 
 
+  # Also make sure a crontab is in place to delete old deployment folders of this application
+  template "/etc/cron.d/#{application}_cleanup_old_releases_crontab" do
+    source 'cleanup_old_releases_crontab.erb'
+    variables({
+      :releases_folder_path => File.join(deploy[:deploy_to], 'releases')
+    })
+  end
+
+
   # This seems to only log things instead of actually restart anything
   ruby_block "restart node.js application #{application}" do
     block do
@@ -76,5 +85,6 @@ node[:deploy].each do |application, deploy|
       $? == 0
     end
   end
+
 end
 
