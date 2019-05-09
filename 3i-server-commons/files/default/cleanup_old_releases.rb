@@ -24,7 +24,7 @@ release_folders.keep_if {
 }
 
 release_folders.each do |old_release_dir|
-  system("rm -r #{old_release_dir}")
+  system("rm -rf #{old_release_dir}")
 end
 
 
