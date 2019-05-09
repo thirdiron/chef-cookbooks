@@ -14,7 +14,7 @@ releases_path = ARGV[0]
 release_folders = Dir[releases_path + '/*/'].sort!
 release_folders.pop # Always keep latest release
 
-releases.keep_if {
+release_folders.keep_if {
   |release|
   release_timestamp = File.basename(release)
   # delete deployments after 30 days
@@ -23,7 +23,7 @@ releases.keep_if {
   not is_old
 }
 
-releases.each do |old_release_dir|
+release_folders.each do |old_release_dir|
   system("rm -r #{old_release_dir}")
 end
 
