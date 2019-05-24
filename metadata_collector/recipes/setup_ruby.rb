@@ -8,7 +8,7 @@
 # rubygems during machine setup
 
 execute 'install_updater_gem' do
-  command 'sudo gem install rubygems-update'
+  command 'sudo gem install rubygems-update -v "2.7.9"'
   user 'ubuntu'
 end
 
