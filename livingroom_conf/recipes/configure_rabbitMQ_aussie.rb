@@ -34,7 +34,7 @@ end
 
 rabbitmq_user 'aussie' do
   vhost "aussie"
-  permissions "^$ .* .*"
+  permissions ".* .* .*"
   action :set_permissions
 end
 
