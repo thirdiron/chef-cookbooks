@@ -51,6 +51,17 @@ rabbitmq_user 'browzinecms' do
   action :set_permissions
 end
 
+rabbitmq_user 'metadatacollector' do
+  password node['rabbitmq-settings']['metadatacollector-password']
+  action :add
+end
+
+rabbitmq_user 'metadatacollector' do
+  vhost "aussie"
+  permissions "^$ .* .*"
+  action :set_permissions
+end
+
 # Need to mention rsyslog so template updates
 # can notify with the :restart command
 service 'rsyslog' do
