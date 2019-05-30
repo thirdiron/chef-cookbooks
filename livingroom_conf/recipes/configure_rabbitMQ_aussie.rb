@@ -47,7 +47,7 @@ end
 
 rabbitmq_user 'browzinecms' do
   vhost "aussie"
-  permissions "^$ .* .*"
+  permissions ".* .* .*"
   action :set_permissions
 end
 
@@ -58,7 +58,7 @@ end
 
 rabbitmq_user 'metadatacollector' do
   vhost "aussie"
-  permissions "^$ .* .*"
+  permissions ".* .* .*"
   action :set_permissions
 end
 
