@@ -34,7 +34,7 @@ end
 
 rabbitmq_user 'aussie' do
   vhost "aussie"
-  permissions "^$ .* .*"
+  permissions ".* .* .*"
   action :set_permissions
 end
 
@@ -47,7 +47,18 @@ end
 
 rabbitmq_user 'browzinecms' do
   vhost "aussie"
-  permissions "^$ .* .*"
+  permissions ".* .* .*"
+  action :set_permissions
+end
+
+rabbitmq_user 'metadatacollector' do
+  password node['rabbitmq-settings']['metadatacollector-password']
+  action :add
+end
+
+rabbitmq_user 'metadatacollector' do
+  vhost "aussie"
+  permissions ".* .* .*"
   action :set_permissions
 end
 

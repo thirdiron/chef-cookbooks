@@ -2,13 +2,6 @@ nodejs_npm "pm2" do
   version "2.10.1"
 end
 
-directory '/home/ubuntu/.pm2' do
-  owner 'ubuntu'
-  group 'root'
-  mode '0755'
-  action :create
-end
-
 # set the modules folder owner to ubuntu
 # so the ubuntu user can actually install modules
 # (like the server monitor module)
@@ -16,6 +9,7 @@ directory '/home/ubuntu/.pm2/modules' do
   owner 'ubuntu'
   group 'root'
   mode '0755'
+  recursive true
   action :create
 end
 
