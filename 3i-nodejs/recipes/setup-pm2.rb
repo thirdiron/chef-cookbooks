@@ -4,10 +4,9 @@ end
 
 # Set .pm2 folder permissions so ubuntu user
 # can update things
-directory '/dome/ubuntu/.pm2' do
-  ownder 'ubuntu'
-  group 'ubuntu'
-  mode '0755'
+execute 'setup-pm2-folder-permissions' do
+  command 'chown ubuntu:ubuntu /home/ubuntu/.pm2'
+  user 'root'
 end
 
 # set the modules folder owner to ubuntu
