@@ -4,11 +4,11 @@ end
 
 # Set .pm2 folder permissions so ubuntu user
 # can update things
-directory '/home/ubuntu/.pm2' do
-  owner 'ubuntu'
-  group 'ubuntu'
-  mode '0755'
-end
+#directory '/home/ubuntu/.pm2' do
+#  owner 'ubuntu'
+#  group 'ubuntu'
+#  mode '0755'
+#end
 
 # set the modules folder owner to ubuntu
 # so the ubuntu user can actually install modules
