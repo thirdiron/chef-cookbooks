@@ -5,7 +5,7 @@ end
 # Set .pm2 folder permissions so ubuntu user
 # can update things
 directory '/dome/ubuntu/.pm2' do
-  ownder 'ubuntu'
+  owner 'ubuntu'
   group 'ubuntu'
   mode '0755'
 end
