@@ -34,3 +34,7 @@ Include `3i-nodejs` in your node's `run_list`:
 ## License and Authors
 
 Author:: Mike Lang (mike@thirdiron.com)
+
+## Suggested Things left to do
+- Pin nodejs version
+- Convert node['keystore']* to SSM values in AWS
