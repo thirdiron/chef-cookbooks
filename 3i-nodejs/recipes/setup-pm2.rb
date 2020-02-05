@@ -1,5 +1,5 @@
-nodejs_npm "pm2" do
-  version "2.10.1"
+nodejs_npm 'pm2' do
+  version '2.10.1'
 end
 
 # Set .pm2 folder permissions so ubuntu user
@@ -20,14 +20,14 @@ directory "/home/#{node['3i-nodejs']['cloud_user']}/.pm2/modules" do
   action :create
 end
 
-execute "setup-pm2-startup-script" do
+execute 'setup-pm2-startup-script' do
   command "env PATH=$PATH:/usr/bin pm2 startup -u #{node['3i-nodejs']['cloud_user']} --hp /home/#{node['3i-nodejs']['cloud_user']}"
   user 'root'
 end
 
-execute "link-pm2-to-keymetrics" do
+execute 'link-pm2-to-keymetrics' do
   command "pm2 link #{node['keymetrics']['secret-key']} #{node['keymetrics']['public-key']}"
   user node['3i-nodejs']['cloud_user']
-  environment ({'HOME' => node['3i-nodejs']['cloud_user']})
+  environment ({ 'HOME' => node['3i-nodejs']['cloud_user'] })
   not_if { node['keymetrics']['secret-key'] == '' }
 end

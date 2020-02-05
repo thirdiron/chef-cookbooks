@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# include the dependent nodejs recipe, but with our module's attributes 
+# include the dependent nodejs recipe, but with our module's attributes
 # so we fetch the appropriate version of nodeJS
 include_recipe 'nodejs::nodejs_from_package'
 
