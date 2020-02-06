@@ -2,11 +2,13 @@ define :ti_opsworks_pm2_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
 
-  # Use the OpsWorks nodeJS configuration library to
-  # invoke npm install
-  Chef::Log.info("Running npm install in directory #{deploy[:deploy_to]}/current")
-  OpsWorks::NodejsConfiguration.npm_install(application, node[:deploy][application], "#{deploy[:deploy_to]}/current", node[:opsworks_nodejs][:npm_install_options])
-
+  # install package.json depdencencies with an npm install
+  #
+  execute "/usr/local/bin/npm install" do
+    cwd node[:release_path]
+    user node[:deploy][application][:user]
+    environment node[:deploy][application][:environment_variables]
+  end
 
   node[:dependencies][:npms].each do |npm, version|
     execute "/usr/local/bin/npm install #{npm}" do
