@@ -4,7 +4,7 @@ define :ti_opsworks_pm2_nodejs do
 
   # install package.json depdencencies with an npm install
   #
-  execute "/usr/bin/npm install" do
+  execute "cd #{deploy[:deploy_to]}/current && /usr/bin/npm install" do
     cwd "#{deploy[:deploy_to]}/current"
     user node[:deploy][application][:user]
     environment node[:deploy][application][:environment_variables]
