@@ -4,14 +4,14 @@ define :ti_opsworks_pm2_nodejs do
 
   # install package.json depdencencies with an npm install
   #
-  execute "/usr/local/bin/npm install" do
+  execute "/usr/bin/npm install" do
     cwd node[:release_path]
     user node[:deploy][application][:user]
     environment node[:deploy][application][:environment_variables]
   end
 
   node[:dependencies][:npms].each do |npm, version|
-    execute "/usr/local/bin/npm install #{npm}" do
+    execute "/usr/bin/npm install #{npm}" do
       cwd node[:release_path]
     end
   end
