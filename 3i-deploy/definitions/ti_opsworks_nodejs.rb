@@ -6,6 +6,14 @@ define :ti_opsworks_nodejs do
     action :nothing
   end
 
+  # install package.json depdencencies with an npm install
+  #
+  execute "su #{node[:deploy][application][:user]} -c 'cd #{deploy[:deploy_to]}/current && /usr/bin/npm install'" do
+    cwd "#{deploy[:deploy_to]}/current"
+    user "root"
+    environment node[:deploy][application][:environment_variables]
+  end
+
   node[:dependencies][:npms].each do |npm, version|
     execute "/usr/local/bin/npm install #{npm}" do
       cwd "#{deploy[:deploy_to]}/current"
