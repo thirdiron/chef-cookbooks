@@ -5,7 +5,6 @@ define :ti_opsworks_pm2_nodejs do
   # install package.json depdencencies with an npm install
   #
   #
-  Chef::Log.info("Trying to install dependencies using user: #{node[:deploy][application][:user]}")
   execute "su #{node[:deploy][application][:user]} -c 'cd #{deploy[:deploy_to]}/current && /usr/bin/npm install'" do
     cwd "#{deploy[:deploy_to]}/current"
     user "root"
