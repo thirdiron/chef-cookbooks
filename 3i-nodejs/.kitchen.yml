@@ -1,15 +1,44 @@
 ---
 driver:
-  name: vagrant
+  name: dokken
+  use_sudo: false
+  privileged: true
+
+transport:
+  name: dokken
 
 provisioner:
-  name: chef_solo
+  name: dokken
+  chef_license: accept
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: ubuntu-14.04
-  - name: centos-7.1
+  - name: ubuntu-18.04
+    driver:
+      image: dokken/ubuntu-18.04
+      pid_one_command: /bin/systemd
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update -y
+        - RUN /usr/bin/apt-get install sudo -y
+  - name: ubuntu-16.04
+    driver:
+      image: dokken/ubuntu-16.04
+      pid_one_command: /bin/systemd
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update -y
+        - RUN /usr/bin/apt-get install sudo -y
 
 suites:
   - name: default
     run_list:
+      - recipe[3i-nodejs::default]
+      - recipe[3i-nodejs::setup-pm2]
+    verifier:
+      inspec_tests:
+        - test/integration/default
     attributes:
+      3i-nodejs:
+        cloud_user: 'root'
+        cloud_group: 'root'
