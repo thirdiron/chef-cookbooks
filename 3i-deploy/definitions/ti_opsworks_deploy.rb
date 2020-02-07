@@ -104,16 +104,6 @@ define :ti_opsworks_deploy do
       before_migrate do
         link_tempfiles_to_current_release
 
-        if deploy[:application_type] == 'nodejs' || ( deploy[:application_type] == 'other' && deploy['environment_variables']['OPSWORKS_APPLICATION_TYPE'].include?("nodejs"))
-          # by convention, if application_type is other, look in the
-          # OPSWORKS_APPLICATION_TYPE environment variable.  If 
-          # the value contains "nodejs" it's a custom nodeJS setup and
-          # we need to run npm install in the release directory
-          if deploy[:auto_npm_install_on_deploy]
-            OpsWorks::NodejsConfiguration.npm_install(application, node[:deploy][application], release_path, node[:opsworks_nodejs][:npm_install_options])
-          end
-        end
-
         # run user provided callback file
         run_callback_from_file("#{release_path}/deploy/before_migrate.rb")
       end

@@ -4,10 +4,11 @@ end
 
 # Set .pm2 folder permissions so ubuntu user
 # can update things
-# execute 'setup-pm2-folder-permissions' do
-#   command "chown #{node['3i-nodejs']['cloud_user']}:#{node['3i-nodejs']['cloud_group']} /home/#{node['3i-nodejs']['cloud_user']}/.pm2"
-#   user 'root'
-# end
+directory '/home/ubuntu/.pm2' do
+  owner 'ubuntu'
+  group 'ubuntu'
+  mode '0755'
+end
 
 # set the modules folder owner to ubuntu
 # so the ubuntu user can actually install modules
