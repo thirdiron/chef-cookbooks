@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: 3i-rsyslog
+# Cookbook:: 3i-rsyslog
 # Spec:: default
 #
-# Copyright (c) 2016 The Authors, All Rights Reserved.
+# Copyright:: (c) 2016 The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
