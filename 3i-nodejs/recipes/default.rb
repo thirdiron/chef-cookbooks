@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: 3i-nodejs
+# Cookbook:: 3i-nodejs
 # Recipe:: default
 #
-# Copyright (C) 2015 Mike Lang
+# Copyright:: (C) 2015 Mike Lang
 #
 # All rights reserved - Do Not Redistribute
 #
