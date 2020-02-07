@@ -1,8 +1,9 @@
-include_recipe 'apt'
+# this apt_update action is now included in chef-client >= 12.7
+# include_recipe 'apt'
+apt_update
 
 apt_repository 'rsyslog-official' do
   uri 'ppa:adiscon/v8-stable'
-  distribution node['lsb']['codename']
 end
 
 apt_package 'rsyslog' do
@@ -21,7 +22,12 @@ apt_package 'tmpreaper'
 # So it can reach standard opsworks deployed
 # logs
 
-execute 'add_user_to_group' do
-  command 'usermod -a -G www-data syslog'
-  user 'root'
+# execute 'add_user_to_group' do
+#   command 'usermod -a -G www-data syslog'
+#   user 'root'
+# end
+group 'www-data' do
+  action :modify
+  members 'syslog'
+  append true
 end
