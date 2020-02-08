@@ -4,10 +4,10 @@ end
 
 # Set .pm2 folder permissions so ubuntu user
 # can update things
-directory '/home/ubuntu/.pm2' do
-  owner 'ubuntu'
-  group 'ubuntu'
-  mode '0755'
+directory "#{node['3i-nodejs']['cloud_homedir']}/.pm2" do
+  owner node['3i-nodejs']['cloud_user']
+  group node['3i-nodejs']['cloud_group']
+  # mode '0755'
 end
 
 # set the modules folder owner to ubuntu
@@ -16,13 +16,13 @@ end
 directory "/home/#{node['3i-nodejs']['cloud_user']}/.pm2/modules" do
   owner node['3i-nodejs']['cloud_user']
   group 'root'
-  mode '0755'
+  # mode '0755'
   recursive true
   action :create
 end
 
 execute 'setup-pm2-startup-script' do
-  command "env PATH=$PATH:/usr/bin pm2 startup -u #{node['3i-nodejs']['cloud_user']} --hp /home/#{node['3i-nodejs']['cloud_user']}"
+  command "env PATH=$PATH:/usr/bin pm2 startup -u #{node['3i-nodejs']['cloud_user']} --hp #{node['3i-nodejs']['cloud_homedir']}"
   user 'root'
 end
 
