@@ -2,7 +2,7 @@ include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
   git "/tmp/s3put" do
-    repository 'git@github.com:thirdiron/s3put.git'
+    repository 'https://github.com/thirdiron/s3put.git'
     reference 'v0.1'
     user 'root'
     action :sync
