@@ -49,7 +49,7 @@ node[:deploy].each do |application, deploy|
     notifies :restart, "service[rsyslog]", :immediately
   end
 
-  opsworks_nodejs do
+  ti_opsworks_nodejs do
     deploy_data deploy
     app application
   end
