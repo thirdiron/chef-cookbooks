@@ -18,3 +18,10 @@ $template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag% %msg%\n"
 
 :syslogtag, contains, "<%= @application_name %>"
 *.* @@data.logentries.com:80;Logentries
+
+# Also send entries to InsightOps
+$template InsightOps, "<%= @insight_ops_token %> %HOSTNAME% %syslogtag% %msg%\n"
+
+:syslogtag, contains, "<%= @application_name %>"
+*.* @@us2.data.logs.insight.rapid7.com:80;InsightOps
+

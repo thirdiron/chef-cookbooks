@@ -21,3 +21,13 @@ $template Logentries, "<%= @logentries_token %> %HOSTNAME% %syslogtag% %msg%\n"
 :syslogtag, contains, "monit"
 :msg, contains, "<%= @application_name %>"
 *.* @@data.logentries.com:80;Logentries
+
+# Also send entries from stderr/stdout to InsightOps
+$template InsightOps, "<%= @insight_ops_token %> %HOSTNAME% %syslogtag% %msg%\n"
+:syslogtag, contains, "<%= @application_name %>"
+*.* @@us2.data.logs.insight.rapid7.com:80;InsightOps
+
+# Also send any monit logs related to the app to InsightOps
+:syslogtag, contains, "monit"
+:msg, contains, "<%= @application_name %>"
+*.* @@us2.data.logs.insight.rapid7.com:80;InsightOps

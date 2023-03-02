@@ -37,7 +37,8 @@ node[:deploy].each do |application, deploy|
     group 'root'
     variables(
       :application_name => application,
-      :logentries_token => deploy[:environment_variables]['LOGENTRIES_TOKEN']
+      :logentries_token => deploy[:environment_variables]['LOGENTRIES_TOKEN'],
+      :insight_ops_token => deploy[:environment_variables]['INSIGHT_OPS_TOKEN'],
     )
     notifies :restart, "service[rsyslog]", :immediately
   end
